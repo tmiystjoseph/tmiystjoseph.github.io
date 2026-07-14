@@ -523,14 +523,15 @@
     .form-wrapper {
       margin-top: 2rem;
       background: var(--white);
-      padding: 2rem;
+      padding: 2rem 2rem 0;
       border-top: 4px solid var(--gold);
       overflow: hidden;
+      max-height: 660px;
     }
 
     .form-wrapper iframe {
       width: 100%;
-      height: 620px;
+      height: 730px;
       border: none;
       display: block;
     }
@@ -616,12 +617,13 @@
   <div class="nav-logos">
     <a href="#hero"><img src="assets/TMIY_NewBlue.png" alt="That Man Is You" /></a>
     <div class="nav-divider"></div>
-    <a href="https://stjosephtomsriver.org" target="_blank" rel="noopener" class="logo-chip"><img src="assets/St_Josephs_Logo.jpg" alt="St. Joseph's Roman Catholic Church" /></a>
+    <a href="https://stjosephtomsriver.org" target="_blank" rel="noopener"><img src="assets/St_Josephs_Logo_White.png" alt="St. Joseph's Roman Catholic Church" style="height:48px;" /></a>
   </div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#sessions">Sessions</a></li>
     <li><a href="calendar.html">Calendar</a></li>
+    <li><a href="calendar.html#request">Request an Event</a></li>
     <li><a href="#register" class="nav-cta">Join Us</a></li>
   </ul>
 </nav>
@@ -662,7 +664,7 @@
     <div class="gold-rule"></div>
     <h2 class="section-title">Welcome to TMIY<br>at St. Joseph's</h2>
     <div class="message-card">
-      <p class="message-text">
+      <p class="message-text" id="chapter-message">
         "We are glad you found us. Whether you are returning for another year or considering joining for the first time, know that every man is welcome here. TMIY has been a source of real brotherhood, honest conversation, and genuine spiritual growth for the men of our parish. We meet early, we eat together, and we leave better equipped to be the husbands, fathers, and men God is calling us to be. Come join us this fall."
       </p>
 
@@ -842,15 +844,16 @@
     <div class="gold-rule"></div>
     <h2 class="section-title">Chapter News &amp; Updates</h2>
 
+    <div id="announcements-container">
     <div class="announcement-card">
-      <div class="announcement-date">July 2026</div>
       <h3 class="announcement-title">TMIY St. Joseph's is Launching This Fall</h3>
       <p class="announcement-body">
         We are excited to announce our chapter is kicking off the Apostles of the New Springtime program beginning Saturday, September 19th. All men are welcome — no experience necessary. Register below or contact us with any questions.
       </p>
     </div>
+    </div>
 
-    <!-- Additional announcements can be added here by volunteers -->
+    <!-- Announcements above are auto-populated from the TMIY Site Content Google Sheet. The card shown is a fallback if the sheet can't be reached. -->
 
   </div>
 </section>
@@ -932,6 +935,78 @@
     const arrow = btn.querySelector('.arrow');
     arrow.textContent = content.classList.contains('visible') ? '▲' : '▼';
   }
+
+  // ── Dynamic content from published Google Sheet (TMIY Site Content) ──
+  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSpu6Iyz83caPHIKgpomnLJjzMM2T98EF1bQRhk1cCehvAbc7FHsJqCVNWYLainffUi6sWxzrYpmW8c/pub?gid=0&single=true&output=csv';
+
+  // Minimal CSV parser that handles quoted fields with commas and newlines
+  function parseCSV(text) {
+    const rows = [];
+    let row = [], field = '', inQuotes = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i], next = text[i + 1];
+      if (inQuotes) {
+        if (c === '"' && next === '"') { field += '"'; i++; }
+        else if (c === '"') { inQuotes = false; }
+        else { field += c; }
+      } else {
+        if (c === '"') { inQuotes = true; }
+        else if (c === ',') { row.push(field); field = ''; }
+        else if (c === '\r') { /* skip */ }
+        else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+        else { field += c; }
+      }
+    }
+    if (field.length > 0 || row.length > 0) { row.push(field); rows.push(row); }
+    return rows;
+  }
+
+  function escapeHtml(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  fetch(SHEET_CSV_URL)
+    .then(r => { if (!r.ok) throw new Error('sheet unreachable'); return r.text(); })
+    .then(text => {
+      const rows = parseCSV(text);
+      const data = {};
+      rows.forEach((r, idx) => {
+        if (idx === 0) return; // skip header
+        if (r.length >= 2 && r[0].trim()) data[r[0].trim()] = r[1];
+      });
+
+      // Chapter message
+      if (data.chapter_message && data.chapter_message.trim()) {
+        const el = document.getElementById('chapter-message');
+        if (el) el.textContent = '"' + data.chapter_message.trim() + '"';
+      }
+
+      // Announcements (up to 3) — only rebuild if at least one title present
+      const anyAnnouncement = ['announcement_1_title','announcement_2_title','announcement_3_title']
+        .some(k => data[k] && data[k].trim());
+      if (anyAnnouncement) {
+        const container = document.getElementById('announcements-container');
+        if (container) {
+          let html = '';
+          for (let i = 1; i <= 3; i++) {
+            const title = data['announcement_' + i + '_title'];
+            const body  = data['announcement_' + i + '_body'];
+            if (title && title.trim()) {
+              html += '<div class="announcement-card">';
+              html += '<h3 class="announcement-title">' + escapeHtml(title.trim()) + '</h3>';
+              if (body && body.trim()) {
+                html += '<p class="announcement-body">' + escapeHtml(body.trim()) + '</p>';
+              }
+              html += '</div>';
+            }
+          }
+          if (html) container.innerHTML = html;
+        }
+      }
+    })
+    .catch(() => { /* Sheet unreachable — static fallback content stays in place */ });
 </script>
 
 </body>
