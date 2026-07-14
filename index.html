@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TMIY St. Joseph's — Toms River, NJ</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #1B2A6B;
+      --deep-navy:  #0A1540;
+      --gold:       #C9A84C;
+      --gold-light: #E8C96A;
+      --white:      #FFFFFF;
+      --off-white:  #F5F5F5;
+      --text-dark:  #1A1A1A;
+      --text-mid:   #444444;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--text-dark);
+      background: var(--white);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--deep-navy);
+      border-bottom: 2px solid var(--gold);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logos {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .nav-logos img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-logos a.logo-chip {
+      background: var(--white);
+      padding: 5px 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logos a.logo-chip img {
+      height: 32px;
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 32px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+
+    .nav-links a.nav-cta {
+      background: var(--gold);
+      color: var(--deep-navy);
+      padding: 0.5rem 1.1rem;
+      font-weight: bold;
+      opacity: 1;
+    }
+
+    .nav-links a.nav-cta:hover {
+      background: var(--gold-light);
+      color: var(--deep-navy);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      margin-top: 64px;
+      position: relative;
+      height: 92vh;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--deep-navy);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/ANSprimary-scaled-1.jpg');
+      background-size: cover;
+      background-position: center top;
+      opacity: 0.35;
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      padding: 2rem;
+      max-width: 760px;
+    }
+
+    .hero-tagline {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: normal;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--gold-light);
+      font-style: italic;
+      margin-bottom: 2rem;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-local {
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--deep-navy);
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.85rem 2.2rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .hero-cta:hover { background: var(--gold-light); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.4);
+      font-family: Arial, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      width: 1px;
+      height: 32px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 5rem 2rem; }
+
+    .section-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--navy);
+      font-weight: normal;
+      margin-bottom: 1.4rem;
+      line-height: 1.25;
+    }
+
+    .section-body {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--text-mid);
+      max-width: 680px;
+    }
+
+    .gold-rule {
+      width: 48px;
+      height: 3px;
+      background: var(--gold);
+      margin-bottom: 1.6rem;
+    }
+
+    /* ── WHAT IS TMIY ── */
+    #about { background: var(--white); }
+
+    .about-link {
+      display: inline-block;
+      margin-top: 1.6rem;
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: none;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+
+    .about-link:hover { color: var(--gold); }
+
+    /* ── LEADER MESSAGE ── */
+    #message { background: var(--deep-navy); }
+
+    #message .section-title { color: var(--white); }
+    #message .section-eyebrow { color: var(--gold); }
+
+    .message-card {
+      background: rgba(255,255,255,0.05);
+      border-left: 4px solid var(--gold);
+      padding: 2rem 2.4rem;
+      margin-top: 1.6rem;
+    }
+
+    .message-text {
+      font-size: 1.08rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.85);
+      font-style: italic;
+      margin-bottom: 1.4rem;
+    }
+
+    .message-sig {
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    /* ── WEEKLY SCHEDULE ── */
+    #schedule { background: var(--off-white); }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .schedule-item {
+      background: var(--white);
+      border-top: 3px solid var(--gold);
+      padding: 1.2rem 1.4rem;
+    }
+
+    .schedule-time {
+      font-family: Arial, sans-serif;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+
+    .schedule-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .schedule-location {
+      margin-top: 2rem;
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .schedule-location::before {
+      content: '📍';
+      font-size: 1rem;
+    }
+
+    /* ── FALL SESSIONS ── */
+    #sessions { background: var(--white); }
+
+    .sessions-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      font-family: Arial, sans-serif;
+    }
+
+    .sessions-table thead th {
+      background: var(--navy);
+      color: var(--white);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.9rem 1.2rem;
+      text-align: left;
+    }
+
+    .sessions-table tbody tr {
+      border-bottom: 1px solid #E8E8E8;
+      transition: background 0.15s;
+    }
+
+    .sessions-table tbody tr:hover { background: #F9F7F2; }
+
+    .sessions-table tbody tr.no-meeting {
+      background: #FFF8E7;
+      color: #999;
+      font-style: italic;
+    }
+
+    .sessions-table td {
+      padding: 0.85rem 1.2rem;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      vertical-align: top;
+    }
+
+    .session-week {
+      font-weight: bold;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .session-date {
+      white-space: nowrap;
+      color: var(--text-mid);
+      font-size: 0.85rem;
+    }
+
+    .session-title {
+      font-weight: bold;
+      color: var(--navy);
+    }
+
+    .session-presenter {
+      font-size: 0.8rem;
+      color: var(--text-mid);
+      margin-top: 0.2rem;
+    }
+
+    /* ── SPRING PEEK ── */
+    #spring { background: var(--off-white); }
+
+    .spring-toggle {
+      background: none;
+      border: 2px solid var(--navy);
+      color: var(--navy);
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.8rem 1.8rem;
+      cursor: pointer;
+      margin-top: 1.6rem;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .spring-toggle:hover {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .spring-toggle .arrow {
+      display: inline-block;
+      transition: transform 0.3s;
+    }
+
+    .spring-toggle.open .arrow { transform: rotate(180deg); }
+
+    .spring-content {
+      display: none;
+      margin-top: 1.6rem;
+    }
+
+    .spring-content.visible { display: block; }
+
+    .spring-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.8rem;
+    }
+
+    .spring-list li {
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      padding: 0.6rem 0.8rem;
+      border-left: 3px solid var(--gold);
+      background: var(--white);
+    }
+
+    .spring-list li strong {
+      color: var(--navy);
+      display: block;
+      margin-bottom: 0.1rem;
+    }
+
+    /* ── ANNOUNCEMENTS ── */
+    #announcements { background: var(--white); }
+
+    .announcement-card {
+      border-left: 4px solid var(--gold);
+      padding: 1.2rem 1.6rem;
+      margin-bottom: 1.2rem;
+      background: var(--off-white);
+    }
+
+    .announcement-date {
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+    }
+
+    .announcement-title {
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+
+    .announcement-body {
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    /* ── VIDEO ── */
+    #video { background: var(--deep-navy); }
+    #video .section-title { color: var(--white); }
+    #video .section-eyebrow { color: var(--gold); }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin-top: 2rem;
+      background: #000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* ── REGISTRATION ── */
+    #register { background: var(--off-white); scroll-margin-top: 80px; padding-top: 6rem; }
+
+    .form-wrapper {
+      margin-top: 2rem;
+      background: var(--white);
+      padding: 2rem 2rem 0;
+      border-top: 4px solid var(--gold);
+      overflow: hidden;
+      max-height: 660px;
+    }
+
+    .form-wrapper iframe {
+      width: 100%;
+      height: 730px;
+      border: none;
+      display: block;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--navy); padding: 3.5rem 2rem; }
+
+    #contact .section-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .contact-block { flex: 1; min-width: 200px; }
+
+    .contact-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-value {
+      color: var(--white);
+      font-size: 1rem;
+      text-decoration: none;
+      line-height: 1.6;
+    }
+
+    a.contact-value:hover { color: var(--gold-light); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--deep-navy);
+      border-top: 2px solid var(--gold);
+      padding: 1.8rem 2rem;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .sessions-table thead th:nth-child(3) { display: none; }
+      .sessions-table td:nth-child(3) { display: none; }
+      #contact .section-inner { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logos">
+    <a href="#hero"><img src="assets/TMIY_NewBlue.png" alt="That Man Is You" /></a>
+    <div class="nav-divider"></div>
+    <a href="https://stjosephtomsriver.org" target="_blank" rel="noopener" class="logo-chip"><img src="assets/St_Josephs_Logo_Trimmed.png" alt="St. Joseph's Roman Catholic Church" /></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#sessions">Sessions</a></li>
+    <li><a href="calendar.html">Calendar</a></li>
+    <li><a href="calendar.html#request">Request an Event</a></li>
+    <li><a href="#register" class="nav-cta">Join Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-tagline">That Man Is You! &nbsp;·&nbsp; St. Joseph's, Toms River</p>
+    <h1 class="hero-title">Apostles of the<br>New Springtime</h1>
+    <p class="hero-subtitle">Set the World on Fire</p>
+    <p class="hero-local">St. Joseph Roman Catholic Church &nbsp;·&nbsp; Toms River, NJ</p>
+    <a href="#register" class="hero-cta">Join Us This Fall</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-eyebrow">What is TMIY?</p>
+    <div class="gold-rule"></div>
+    <h2 class="section-title">An Interactive Men's Program<br>Built for the Modern World</h2>
+    <p class="section-body">
+      That Man Is You! is a Catholic men's program focused on the development of male leadership in the modern world. It combines the best research from science with the teachings of the Catholic faith and the wisdom of the saints — developing a vision of authentic men capable of transforming themselves, their families, and greater society.
+    </p>
+    <p class="section-body" style="margin-top:1rem;">
+      Journey from the birth of the early Church to the call of Christ that echoes in our own day. From Christ to the Apostles, from the Apostolic Fathers to the men of our time, the voice of God has never fallen silent. Now the call is ours to answer.
+    </p>
+    <a href="https://paradisusdei.org/that-man-is-you/" target="_blank" class="about-link">Learn more at thatmanisyou.com →</a>
+  </div>
+</section>
+
+<!-- LEADER MESSAGE -->
+<section id="message">
+  <div class="section-inner">
+    <p class="section-eyebrow">A Word from Our Chapter</p>
+    <div class="gold-rule"></div>
+    <h2 class="section-title">Welcome to TMIY<br>at St. Joseph's</h2>
+    <div class="message-card">
+      <p class="message-text" id="chapter-message">
+        "We are glad you found us. Whether you are returning for another year or considering joining for the first time, know that every man is welcome here. TMIY has been a source of real brotherhood, honest conversation, and genuine spiritual growth for the men of our parish. We meet early, we eat together, and we leave better equipped to be the husbands, fathers, and men God is calling us to be. Come join us this fall."
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<!-- WEEKLY SCHEDULE -->
+<section id="schedule">
+  <div class="section-inner">
+    <p class="section-eyebrow">Weekly Format</p>
+    <div class="gold-rule"></div>
+    <h2 class="section-title">Saturday Mornings<br>Starting September 19, 2026</h2>
+    <div class="schedule-grid">
+      <div class="schedule-item">
+        <div class="schedule-time">6:00 AM</div>
+        <div class="schedule-label">Breakfast</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">6:30 AM</div>
+        <div class="schedule-label">Presentation</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">7:00 AM</div>
+        <div class="schedule-label">Small Group</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">7:30 AM</div>
+        <div class="schedule-label">Dismissal</div>
+      </div>
+    </div>
+    <p class="schedule-location">St. Joseph Roman Catholic Church — Lower Level &nbsp;·&nbsp; Toms River, NJ</p>
+  </div>
+</section>
+
+<!-- FALL SESSIONS -->
+<section id="sessions">
+  <div class="section-inner">
+    <p class="section-eyebrow">Fall Semester 2026</p>
+    <div class="gold-rule"></div>
+    <h2 class="section-title">Session Schedule</h2>
+    <table class="sessions-table">
+      <thead>
+        <tr>
+          <th>Week</th>
+          <th>Date</th>
+          <th>Session</th>
+          <th>Presenter</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="session-week">1</td>
+          <td class="session-date">Sep 19</td>
+          <td><div class="session-title">The Call to an Elite and Fulfilled Life</div></td>
+          <td class="session-presenter">Wade Berzas</td>
+        </tr>
+        <tr>
+          <td class="session-week">2</td>
+          <td class="session-date">Sep 26</td>
+          <td><div class="session-title">The Earliest Church</div></td>
+          <td class="session-presenter">Michael Gormley</td>
+        </tr>
+        <tr>
+          <td class="session-week">3</td>
+          <td class="session-date">Oct 3</td>
+          <td><div class="session-title">The Spirit of St. Paul</div></td>
+          <td class="session-presenter">Michael Gormley</td>
+        </tr>
+        <tr>
+          <td class="session-week">4</td>
+          <td class="session-date">Oct 10</td>
+          <td><div class="session-title">The Faith of the Apostolic Fathers</div></td>
+          <td class="session-presenter">Dr. Andrew Swafford</td>
+        </tr>
+        <tr>
+          <td class="session-week">5</td>
+          <td class="session-date">Oct 17</td>
+          <td><div class="session-title">The Witness of the Apostolic Fathers</div></td>
+          <td class="session-presenter">Dr. Andrew Swafford</td>
+        </tr>
+        <tr>
+          <td class="session-week">6</td>
+          <td class="session-date">Oct 24</td>
+          <td><div class="session-title">St. Augustine: A Saint for Our Time</div></td>
+          <td class="session-presenter">Dr. Andrew Swafford</td>
+        </tr>
+        <tr>
+          <td class="session-week">7</td>
+          <td class="session-date">Oct 31</td>
+          <td><div class="session-title">A New Evangelization</div></td>
+          <td class="session-presenter">Michael Gormley</td>
+        </tr>
+        <tr>
+          <td class="session-week">8</td>
+          <td class="session-date">Nov 7</td>
+          <td><div class="session-title">The Paradise of God</div></td>
+          <td class="session-presenter">Mark Hartfiel</td>
+        </tr>
+        <tr>
+          <td class="session-week">9</td>
+          <td class="session-date">Nov 14</td>
+          <td><div class="session-title">The Mystery of the Holy Family</div></td>
+          <td class="session-presenter">Mark Hartfiel</td>
+        </tr>
+        <tr class="no-meeting">
+          <td>—</td>
+          <td class="session-date">Nov 21</td>
+          <td><div class="session-title">No Meeting — Thanksgiving Weekend</div></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td class="session-week">10</td>
+          <td class="session-date">Nov 28</td>
+          <td><div class="session-title">Superabundant Saints</div></td>
+          <td class="session-presenter">Jamie Gonzales</td>
+        </tr>
+        <tr>
+          <td class="session-week">11</td>
+          <td class="session-date">Dec 5</td>
+          <td><div class="session-title">The School of Nazareth and the Seven Steps</div></td>
+          <td class="session-presenter">Mike DiCosola</td>
+        </tr>
+        <tr>
+          <td class="session-week">12</td>
+          <td class="session-date">Dec 12</td>
+          <td><div class="session-title">The Spiritual Journey: Active and Passive</div></td>
+          <td class="session-presenter">Mark Hartfiel</td>
+        </tr>
+        <tr>
+          <td class="session-week">13</td>
+          <td class="session-date">Dec 19</td>
+          <td><div class="session-title">Building a Spiritual Plan of Life</div></td>
+          <td class="session-presenter">Mike DiCosola</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SPRING SEMESTER -->
+<section id="spring">
+  <div class="section-inner">
+    <p class="section-eyebrow">Spring Semester 2027</p>
+    <div class="gold-rule"></div>
+    <h2 class="section-title">Coming in the New Year</h2>
+    <p class="section-body">
+      The spring semester continues the journey — sending men forth as a light to the nations, encountering the Luminous Mysteries of Christ, and finding their personal mission field.
+    </p>
+    <button class="spring-toggle" onclick="toggleSpring(this)">
+      View Spring Schedule <span class="arrow">▼</span>
+    </button>
+    <div class="spring-content" id="springContent">
+      <ul class="spring-list">
+        <li><strong>Week 14 — Finding Your Mission Field</strong></li>
+        <li><strong>Week 15 — My Resurrection and Call to Evangelize</strong></li>
+        <li><strong>Week 16 — AI: The False Apostle</strong></li>
+        <li><strong>Week 17 — Apostles in the Home</strong></li>
+        <li><strong>Week 18 — The Mysteries of Light</strong></li>
+        <li><strong>Week 19 — The Baptism in the Jordan</strong></li>
+        <li><strong>Week 20 — The Wedding Feast at Cana</strong></li>
+        <li><strong>Week 21 — The Proclamation of the Kingdom</strong></li>
+        <li><strong>Week 22 — The Transfiguration</strong></li>
+        <li><strong>Week 23 — The Institution of the Eucharist</strong></li>
+        <li><strong>Week 24 — A Harvest of Holiness</strong></li>
+        <li><strong>Week 25 — The Gospel of Suffering</strong></li>
+        <li><strong>Week 26 — Apostles of the New Springtime</strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ANNOUNCEMENTS -->
+<section id="announcements">
+  <div class="section-inner">
+    <p class="section-eyebrow">Announcements</p>
+    <div class="gold-rule"></div>
+    <h2 class="section-title">Chapter News &amp; Updates</h2>
+
+    <div id="announcements-container">
+    <div class="announcement-card">
+      <h3 class="announcement-title">TMIY St. Joseph's is Launching This Fall</h3>
+      <p class="announcement-body">
+        We are excited to announce our chapter is kicking off the Apostles of the New Springtime program beginning Saturday, September 19th. All men are welcome — no experience necessary. Register below or contact us with any questions.
+      </p>
+    </div>
+    </div>
+
+    <!-- Announcements above are auto-populated from the TMIY Site Content Google Sheet. The card shown is a fallback if the sheet can't be reached. -->
+
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section id="video">
+  <div class="section-inner">
+    <p class="section-eyebrow">See It for Yourself</p>
+    <div class="gold-rule"></div>
+    <h2 class="section-title">Apostles of the New Springtime<br>Program Overview</h2>
+    <div class="video-wrapper">
+      <iframe
+        src="https://www.youtube.com/embed/-m7js1VpbVo"
+        title="TMIY Apostles of the New Springtime — Promo Video"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRATION -->
+<section id="register">
+  <div class="section-inner">
+    <p class="section-eyebrow">All Men Welcome</p>
+    <div class="gold-rule"></div>
+    <h2 class="section-title">Join Us This Fall</h2>
+    <p class="section-body">
+      Ready to take the next step? Fill out the form below and a member of our team will be in touch. No commitment required — come see what TMIY is about.
+    </p>
+    <div class="form-wrapper">
+      <iframe
+        src="https://form.jotform.com/261888303519061"
+        title="TMIY St. Joseph's Registration Form">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-block">
+      <p class="contact-label">Email</p>
+      <a href="mailto:tmiystjoseph@gmail.com" class="contact-value">tmiystjoseph@gmail.com</a>
+    </div>
+    <div class="contact-block">
+      <p class="contact-label">Location</p>
+      <p class="contact-value">St. Joseph Roman Catholic Church<br>Lower Level — Toms River, NJ</p>
+    </div>
+    <div class="contact-block">
+      <p class="contact-label">Meeting Time</p>
+      <p class="contact-value">Saturday Mornings<br>6:00 AM – 7:30 AM</p>
+    </div>
+    <div class="contact-block">
+      <p class="contact-label">National Program</p>
+      <a href="https://paradisusdei.org/that-man-is-you/" target="_blank" class="contact-value">thatmanisyou.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#sessions">Sessions</a>
+    <a href="#register">Join Us</a>
+    <a href="https://paradisusdei.org/that-man-is-you/" target="_blank">Paradisus Dei</a>
+    <a href="https://stjosephtomsriver.org" target="_blank">St. Joseph's Parish</a>
+    <a href="https://stjosephtomsriver.org/our-parish/directory" target="_blank">Parish Ministries</a>
+  </div>
+  <p class="footer-copy">© 2026 TMIY St. Joseph's — Toms River, NJ &nbsp;·&nbsp; A chapter of That Man Is You! by Paradisus Dei</p>
+</footer>
+
+<script>
+  function toggleSpring(btn) {
+    btn.classList.toggle('open');
+    const content = document.getElementById('springContent');
+    content.classList.toggle('visible');
+    const arrow = btn.querySelector('.arrow');
+    arrow.textContent = content.classList.contains('visible') ? '▲' : '▼';
+  }
+
+  // ── Dynamic content from published Google Sheet (TMIY Site Content) ──
+  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSpu6Iyz83caPHIKgpomnLJjzMM2T98EF1bQRhk1cCehvAbc7FHsJqCVNWYLainffUi6sWxzrYpmW8c/pub?gid=0&single=true&output=csv';
+
+  // Minimal CSV parser that handles quoted fields with commas and newlines
+  function parseCSV(text) {
+    const rows = [];
+    let row = [], field = '', inQuotes = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i], next = text[i + 1];
+      if (inQuotes) {
+        if (c === '"' && next === '"') { field += '"'; i++; }
+        else if (c === '"') { inQuotes = false; }
+        else { field += c; }
+      } else {
+        if (c === '"') { inQuotes = true; }
+        else if (c === ',') { row.push(field); field = ''; }
+        else if (c === '\r') { /* skip */ }
+        else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+        else { field += c; }
+      }
+    }
+    if (field.length > 0 || row.length > 0) { row.push(field); rows.push(row); }
+    return rows;
+  }
+
+  function escapeHtml(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  fetch(SHEET_CSV_URL)
+    .then(r => { if (!r.ok) throw new Error('sheet unreachable'); return r.text(); })
+    .then(text => {
+      const rows = parseCSV(text);
+      const data = {};
+      rows.forEach((r, idx) => {
+        if (idx === 0) return; // skip header
+        if (r.length >= 2 && r[0].trim()) data[r[0].trim()] = r[1];
+      });
+
+      // Chapter message
+      if (data.chapter_message && data.chapter_message.trim()) {
+        const el = document.getElementById('chapter-message');
+        if (el) el.textContent = '"' + data.chapter_message.trim() + '"';
+      }
+
+      // Announcements (up to 3) — only rebuild if at least one title present
+      const anyAnnouncement = ['announcement_1_title','announcement_2_title','announcement_3_title']
+        .some(k => data[k] && data[k].trim());
+      if (anyAnnouncement) {
+        const container = document.getElementById('announcements-container');
+        if (container) {
+          let html = '';
+          for (let i = 1; i <= 3; i++) {
+            const title = data['announcement_' + i + '_title'];
+            const body  = data['announcement_' + i + '_body'];
+            if (title && title.trim()) {
+              html += '<div class="announcement-card">';
+              html += '<h3 class="announcement-title">' + escapeHtml(title.trim()) + '</h3>';
+              if (body && body.trim()) {
+                html += '<p class="announcement-body">' + escapeHtml(body.trim()) + '</p>';
+              }
+              html += '</div>';
+            }
+          }
+          if (html) container.innerHTML = html;
+        }
+      }
+    })
+    .catch(() => { /* Sheet unreachable — static fallback content stays in place */ });
+</script>
+
+</body>
+</html>
