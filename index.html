@@ -967,6 +967,20 @@
     return d.innerHTML;
   }
 
+  // Escape first, THEN linkify already-escaped URLs. This order prevents
+  // any raw HTML from slipping through while still allowing clickable links.
+  function escapeAndLinkify(s) {
+    const escaped = escapeHtml(s);
+    // Match http:// or https:// followed by non-space, non-quote chars.
+    // Trailing punctuation (. , ) is trimmed out of the link target.
+    return escaped.replace(/(https?:\/\/[^\s"<]+)/g, function (url) {
+      let trail = '';
+      const m = url.match(/[.,)]+$/);
+      if (m) { trail = m[0]; url = url.slice(0, -trail.length); }
+      return '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--navy);text-decoration:underline;">' + url + '</a>' + trail;
+    });
+  }
+
   fetch(SHEET_CSV_URL)
     .then(r => { if (!r.ok) throw new Error('sheet unreachable'); return r.text(); })
     .then(text => {
@@ -997,7 +1011,7 @@
               html += '<div class="announcement-card">';
               html += '<h3 class="announcement-title">' + escapeHtml(title.trim()) + '</h3>';
               if (body && body.trim()) {
-                html += '<p class="announcement-body">' + escapeHtml(body.trim()) + '</p>';
+                html += '<p class="announcement-body">' + escapeAndLinkify(body.trim()) + '</p>';
               }
               html += '</div>';
             }
